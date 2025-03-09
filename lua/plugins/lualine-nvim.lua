@@ -42,5 +42,4 @@ return {
     vim.api.nvim_set_hl(0, 'lualine_c_normal', { bg = "none"})
 
   end,
-
 }

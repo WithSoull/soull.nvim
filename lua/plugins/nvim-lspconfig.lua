@@ -35,7 +35,7 @@ return {
         -- 'tsserver', -- requires npm to be installed
         -- 'yamlls', -- requires npm to be installed
         'gopls',
-        'python-lsp-server',
+        'pyright',
       }
     })
 
