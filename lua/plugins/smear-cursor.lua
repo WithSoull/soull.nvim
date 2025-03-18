@@ -6,8 +6,8 @@ return {
 
     -- Smear cursor when moving within line or to neighbor lines.
     -- Use `min_horizontal_distance_smear` and `min_vertical_distance_smear` for finer control
-    min_horizontal_distance_smear = 2,
-    min_vertical_distance_smear = 2,
+    min_horizontal_distance_smear = 1,
+    min_vertical_distance_smear = 1,
     -- Draw the smear in buffer space instead of screen space when scrolling
     scroll_buffer_space = true,
 
