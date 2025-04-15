@@ -36,7 +36,7 @@ return {
         -- 'yamlls', -- requires npm to be installed
         'gopls',
         'pyright',
-        'buf-language-server',
+        -- 'buf-language-server',
       }
     })
 
