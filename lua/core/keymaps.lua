@@ -52,9 +52,9 @@ keymap.set("n", "<leader>qc", ":cclose<CR>") -- close quickfix list
 keymap.set("n", "<leader>sm", ":MaximizerToggle<CR>") -- toggle maximize tab
 
 -- Nvim-tree
-keymap.set("n", "<leader>ee", ":NvimTreeToggle<CR>") -- toggle file explorer
-keymap.set("n", "<leader>er", ":NvimTreeFocus<CR>") -- toggle focus to file explorer
-keymap.set("n", "<leader>ef", ":NvimTreeFindFile<CR>") -- find file in file explorer
+keymap.set("n", "<leader>et", ":NvimTreeToggle<CR>") -- toggle file explorer
+keymap.set("n", "<leader>ef", ":NvimTreeFocus<CR>") -- toggle focus to file explorer
+keymap.set("n", "<leader>eg", ":NvimTreeFindFile<CR>") -- find file in file explorer
 
 -- Telescope
 keymap.set('n', '<leader>ff', require('telescope.builtin').find_files, {}) -- fuzzy find files in project
@@ -64,7 +64,6 @@ keymap.set('n', '<leader>fh', require('telescope.builtin').help_tags, {}) -- fuz
 keymap.set('n', '<leader>fs', require('telescope.builtin').current_buffer_fuzzy_find, {}) -- fuzzy find in current file buffer
 keymap.set('n', '<leader>fo', require('telescope.builtin').lsp_document_symbols, {}) -- fuzzy find LSP/class symbols
 keymap.set('n', '<leader>fi', require('telescope.builtin').lsp_incoming_calls, {}) -- fuzzy find LSP/incoming calls
--- keymap.set('n', '<leader>fm', function() require('telescope.builtin').treesitter({default_text=":method:"}) end) -- fuzzy find methods in current class
 keymap.set('n', '<leader>fm', function() require('telescope.builtin').treesitter({symbols={'function', 'method'}}) end) -- fuzzy find methods in current class
 keymap.set('n', '<leader>ft', function() -- grep file contents in current nvim-tree node
   local success, node = pcall(function() return require('nvim-tree.lib').get_node_at_cursor() end)
@@ -88,8 +87,6 @@ keymap.set("n", "<leader>gb", ":GitBlameToggle<CR>") -- toggle git blame
 -- keymap.set("n", "<leader>h8", function() require("harpoon.ui").nav_file(8) end)
 -- keymap.set("n", "<leader>h9", function() require("harpoon.ui").nav_file(9) end)
 
--- Vim REST Console
-keymap.set("n", "<leader>xr", ":call VrcQuery()<CR>") -- Run REST query
 
 -- LSP
 keymap.set('n', '<leader>gg', '<cmd>lua vim.lsp.buf.hover()<CR>')
@@ -98,6 +95,7 @@ keymap.set('n', '<leader>gD', '<cmd>lua vim.lsp.buf.declaration()<CR>')
 keymap.set('n', '<leader>gi', '<cmd>lua vim.lsp.buf.implementation()<CR>')
 keymap.set('n', '<leader>gt', '<cmd>lua vim.lsp.buf.type_definition()<CR>')
 keymap.set('n', '<leader>gr', '<cmd>lua vim.lsp.buf.references()<CR>')
+keymap.set('n', '<leader>gc', '<cmd>lua vim.lsp.buf.clear_references()<CR>')
 keymap.set('n', '<leader>gs', '<cmd>lua vim.lsp.buf.signature_help()<CR>')
 keymap.set('n', '<leader>rr', '<cmd>lua vim.lsp.buf.rename()<CR>')
 keymap.set('n', '<leader>gf', '<cmd>lua vim.lsp.buf.format({async = true})<CR>')
@@ -107,7 +105,6 @@ keymap.set('n', '<leader>gl', '<cmd>lua vim.diagnostic.open_float()<CR>')
 keymap.set('n', '<leader>gp', '<cmd>lua vim.diagnostic.goto_prev()<CR>')
 keymap.set('n', '<leader>gn', '<cmd>lua vim.diagnostic.goto_next()<CR>')
 keymap.set('n', '<leader>tr', '<cmd>lua vim.lsp.buf.document_symbol()<CR>')
-keymap.set('i', '<C-Space>', '<cmd>lua vim.lsp.buf.completion()<CR>')
 
 -- Debugging
 keymap.set("n", "<leader>bb", "<cmd>lua require'dap'.toggle_breakpoint()<cr>")
@@ -131,3 +128,25 @@ keymap.set("n", '<leader>de', function() require('telescope.builtin').diagnostic
 
 -- Hop (easy-motion)
 keymap.set("n", '<leader>h', ":HopWord<CR>")
+
+-- Copy Error's description 
+keymap.set('n', '<leader>ec', function()
+  local diag = vim.diagnostic.get()
+  local cursor_pos = vim.api.nvim_win_get_cursor(0)
+  local line = cursor_pos[1] - 1
+
+  for _, d in ipairs(diag) do
+    if d.lnum == line then
+      vim.fn.setreg('+', d.message)
+      vim.notify("Error's description copied: " .. d.message, vim.log.levels.INFO)
+      return
+    end
+  end
+
+  vim.notify("No error in your string", vim.log.levels.WARN)
+end)
+
+-- Show error
+keymap.set('n', '<leader>ee', function()
+  vim.diagnostic.open_float(nil, { focus = true, border = "rounded" })
+end, { noremap = true, silent = true, desc = "Show diagnostics" })
