@@ -47,14 +47,12 @@ return {
     end
 
     -- Call setup on each LSP server
-    require('mason-lspconfig').setup_handlers({
-      function(server_name)
-        lspconfig[server_name].setup({
-          on_attach = lsp_attach,
-          capabilities = lsp_capabilities,
-        })
-      end
-    })
+    for _, server in ipairs(require("mason-lspconfig").get_installed_servers()) do
+      lspconfig[server].setup({
+        on_attach = lsp_attach,
+        capabilities = lsp_capabilities,
+      })
+    end
 
     -- Lua LSP settings
     lspconfig.lua_ls.setup {
