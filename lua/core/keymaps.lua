@@ -150,3 +150,13 @@ end)
 keymap.set('n', '<leader>ee', function()
   vim.diagnostic.open_float(nil, { focus = true, border = "rounded" })
 end, { noremap = true, silent = true, desc = "Show diagnostics" })
+
+--Ufo
+keymap.set('n', 'zO', require('ufo').openAllFolds)
+keymap.set('n', 'zC', require('ufo').closeAllFolds)
+keymap.set('n', 'Z', function()
+  local winid = require('ufo').peekFoldedLinesUnderCursor()
+  if not winid then
+    vim.lsp.buf.hover()
+  end
+end)
