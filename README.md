@@ -37,7 +37,7 @@ A modern, modular Neovim configuration written in **Lua**, focused on performanc
 - 🎨 Custom UI with `lualine`, `barbecue.nvim`, and smooth colors
 - 🧼 Code formatting and linting helpers
 - 💡 Git integration via `gitsigns.nvim` and `git-blame.nvim`
-- 🎨 Custom random tabs colors![фото](media/4.mp4)
+- 🎨 Custom random tabs colors![фото](media/4.gif)
 
 ---
 
