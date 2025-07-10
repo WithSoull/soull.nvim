@@ -4,7 +4,7 @@ A modern, modular Neovim configuration written in **Lua**, focused on performanc
 
 > ⚡ Powered by [Lazy.nvim](https://github.com/folke/lazy.nvim) plugin manager.
 
-![[Снимок экрана 2025-07-10 в 23.12.10.png]]
+![фото](media/1.png)
 ---
 
 ## 📁 Project Structure
@@ -30,14 +30,14 @@ A modern, modular Neovim configuration written in **Lua**, focused on performanc
 - 🔥 **Fast startup** thanks to Lazy.nvim
 - 🧠 Powerful **LSP** setup with `nvim-lspconfig`
 - 🌳 Syntax highlighting via `nvim-treesitter`
-- 🔍 Fuzzy file search with `telescope.nvim`![[Снимок экрана 2025-07-10 в 23.15.53.png]]
-- 🧭 Efficient navigation with `harpoon` and `hop.nvim`![[Снимок экрана 2025-07-10 в 23.16.36.png]]
+- 🔍 Fuzzy file search with `telescope.nvim`![фото](media/2.png)
+- 🧭 Efficient navigation with `harpoon` and `hop.nvim`![фото](media/3.png)
 - 🎯 Debugging support via `nvim-dap` and `dap-ui`
 - 🧱 Intuitive code completion using `nvim-cmp`
 - 🎨 Custom UI with `lualine`, `barbecue.nvim`, and smooth colors
 - 🧼 Code formatting and linting helpers
 - 💡 Git integration via `gitsigns.nvim` and `git-blame.nvim`
-- 🎨 Custom random tabs colors![[Запись экрана 2025-07-10 в 23.18.46.mov]]
+- 🎨 Custom random tabs colors![фото](media/4.mp4)
 
 ---
 
