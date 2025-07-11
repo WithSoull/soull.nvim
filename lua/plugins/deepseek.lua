@@ -3,17 +3,18 @@ return {
   event = "VeryLazy",
   version = false, -- Never set this value to "*"! Never!
   opts = {
-    -- add any opts here
-    -- for example
     provider = "openai",
-    openai = {
-      endpoint = "https://openrouter.ai/",
-      model = "deepseek/deepseek-chat-v3-0324:free", -- your desired model (or use gpt-4o, etc.)
-      timeout = 30000, -- Timeout in milliseconds, increase this for reasoning models
-      temperature = 0,
-      max_completion_tokens = 8192, -- Increase this to include reasoning tokens (for reasoning models)
-      --reasoning_effort = "medium", -- low|medium|high, only used for reasoning models
-      api_key = "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",
+    providers = {
+      openai = {
+        endpoint = "https://openrouter.ai/api/v1",
+        model = "deepseek/deepseek-chat-v3-0324:free",
+        timeout = 30000,
+        api_key = os.getenv("OPENAI_API_KEY"),
+        extra_request_body = {
+          temperature = 0,
+          max_completion_tokens = 8192,
+        },
+      },
     },
   },
   -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`

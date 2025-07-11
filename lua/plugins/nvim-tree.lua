@@ -26,6 +26,18 @@ return {
     vim.g.loaded_netrw = 1
     vim.g.loaded_netrwPlugin = 1
     require("nvim-tree").setup(opts)
+    
+    --[[ 
+    I AM A FCKING SCHIZ cuz a love this one tree bu default 
+
+    vim.api.nvim_create_autocmd("VimEnter", {
+      callback = function()
+      vim.cmd("cd your/path/to/working/folder/")
+      require("nvim-tree.api").tree.open()
+    end
+    })
+    ]]--
+
   end
 }
 

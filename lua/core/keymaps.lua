@@ -160,3 +160,11 @@ keymap.set('n', 'Z', function()
     vim.lsp.buf.hover()
   end
 end)
+
+-- Avante (DeepSeek)
+keymap.set("n", "<leader>ac", ":AvanteChat<CR>",{ desc = "Avante: chat AI" })
+keymap.set("v", "<leader>ae", ":AvanteEdit<CR>",{ desc = "Avante: change selected" })
+keymap.set("v", "<leader>ax", ":AvanteExplain<CR>", { desc = "Avante: explain" })
+keymap.set("v", "<leader>ad", ":AvanteDoc<CR>", { desc = "Avante: doc selected" })
+keymap.set("v", "<leader>ak", ":AvanteCommand<CR>", { desc = "Avante: AI command" })
+
