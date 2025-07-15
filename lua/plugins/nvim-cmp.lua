@@ -39,6 +39,23 @@ return {
       completion = {
         completeopt = 'menu,menuone,noinsert',
       },
+
+      --[[
+      Shows the source
+      formatting = {
+        format = function(entry, vim_item)
+          vim_item.menu = ({
+            nvim_lsp = "[LSP]",
+            luasnip = "[Snip]",
+            buffer = "[Buf]",
+            path = "[Path]",
+            cmp_tabnine = "[TN]",
+          })[entry.source.name]
+          return vim_item
+        end,
+      },
+      --]]
+      
       mapping = cmp.mapping.preset.insert {
         ['<C-j>'] = cmp.mapping.select_next_item(), -- next suggestion
         ['<C-k>'] = cmp.mapping.select_prev_item(), -- previous suggestion
@@ -72,6 +89,7 @@ return {
       },
       sources = cmp.config.sources({
         { name = "nvim_lsp" }, -- lsp 
+        { name = "cmp_tabnine" }, -- tabnine AI
         { name = "luasnip" }, -- snippets
         { name = "buffer" }, -- text within current buffer
         { name = "path" }, -- file system paths
