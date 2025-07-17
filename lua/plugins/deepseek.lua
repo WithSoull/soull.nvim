@@ -8,8 +8,8 @@ return {
       openai = {
         endpoint = "https://openrouter.ai/api/v1",
         model = "deepseek/deepseek-chat-v3-0324:free",
+        api_key_name = "OPENROUTER_API_KEY",
         timeout = 30000,
-        api_key = os.getenv("OPENAI_API_KEY"),
         extra_request_body = {
           temperature = 0,
           max_completion_tokens = 8192,
@@ -19,7 +19,6 @@ return {
   },
   -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
   build = "make",
-  -- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
   dependencies = {
     "nvim-treesitter/nvim-treesitter",
     "stevearc/dressing.nvim",
