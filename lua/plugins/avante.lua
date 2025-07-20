@@ -1,22 +1,40 @@
+local function get_ollama_models()
+  local models = {}
+  local handle = io.popen('ollama list 2>/dev/null | awk \'NR>1 {print $1}\'')
+  if handle then
+    local output = handle:read("*a")
+    handle:close()
+    for model_name in string.gmatch(output, "[^\r\n]+") do
+      models[model_name] = {
+        __inherited_from = "ollama",
+        model = model_name
+      }
+    end
+  end
+  return models
+end
+
 return {
   "yetone/avante.nvim",
   event = "VeryLazy",
   version = false, -- Never set this value to "*"! Never!
-  opts = {
-    provider = "openai",
-    providers = {
-      openai = {
-        endpoint = "https://openrouter.ai/api/v1",
-        model = "deepseek/deepseek-chat-v3-0324:free",
-        api_key_name = "OPENROUTER_API_KEY",
-        timeout = 30000,
-        extra_request_body = {
-          temperature = 0,
-          max_completion_tokens = 8192,
-        },
+  opts = function()
+    local providers = {
+      ollama = {
+        endpoint = "http://127.0.0.1:11434",
+        model = "deepseek-r1", 
       },
-    },
-  },
+    }
+    
+    -- Merge discovered models with existing providers
+    for name, config in pairs(get_ollama_models()) do
+      providers[name] = config
+    end
+    
+    return {
+      providers = providers
+    }
+  end,
   -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
   build = "make",
   dependencies = {
