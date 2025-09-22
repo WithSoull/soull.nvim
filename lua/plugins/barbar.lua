@@ -7,7 +7,6 @@ return {
     vim.g.barbar_auto_setup = false
   end,
   opts = {
-    clickable = true,
     focus_on_close = 'previous',
     icons = {
       separator = {left = '', right = ''},

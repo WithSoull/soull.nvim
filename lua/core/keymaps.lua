@@ -9,6 +9,7 @@ keymap.set("n", "<leader>qq", ":q!<CR>") -- quit without saving
 keymap.set("n", "<leader>wqa", ":wqa<CR>") -- quit all with saving
 keymap.set("n", "<leader>qa", ":qa<CR>") -- quit all without saving
 keymap.set("n", "<leader>ww", ":w<CR>") -- save
+keymap.set("n", "<leader>E", ":e") -- reload page
 keymap.set("n", "gx", ":!open <c-r><c-a><CR>") -- open URL under cursor
 keymap.set("n", ";", ":", { noremap = true, silent = false }) -- enter command mode 
 keymap.set("i", "jk", "<ESC>")  -- smooth return to normal mode
@@ -48,9 +49,6 @@ keymap.set("n", "<leader>qp", ":cprev<CR>") -- jump to prev quickfix list item
 keymap.set("n", "<leader>ql", ":clast<CR>") -- jump to last quickfix list item
 keymap.set("n", "<leader>qc", ":cclose<CR>") -- close quickfix list
 
--- Vim-maximizer
-keymap.set("n", "<leader>sm", ":MaximizerToggle<CR>") -- toggle maximize tab
-
 -- Nvim-tree
 keymap.set("n", "<leader>et", ":NvimTreeToggle<CR>") -- toggle file explorer
 keymap.set("n", "<leader>ef", ":NvimTreeFocus<CR>") -- toggle focus to file explorer
@@ -71,23 +69,6 @@ keymap.set('n', '<leader>ft', function() -- grep file contents in current nvim-t
   require('telescope.builtin').live_grep({search_dirs = {node.absolute_path}})
 end)
 
--- Git-blame
-keymap.set("n", "<leader>gb", ":GitBlameToggle<CR>") -- toggle git blame
-
--- Harpoon
--- keymap.set("n", "<leader>ha", require("harpoon.mark").add_file)
--- keymap.set("n", "<leader>hh", require("harpoon.ui").toggle_quick_menu)
--- keymap.set("n", "<leader>h1", function() require("harpoon.ui").nav_file(1) end)
--- keymap.set("n", "<leader>h2", function() require("harpoon.ui").nav_file(2) end)
--- keymap.set("n", "<leader>h3", function() require("harpoon.ui").nav_file(3) end)
--- keymap.set("n", "<leader>h4", function() require("harpoon.ui").nav_file(4) end)
--- keymap.set("n", "<leader>h5", function() require("harpoon.ui").nav_file(5) end)
--- keymap.set("n", "<leader>h6", function() require("harpoon.ui").nav_file(6) end)
--- keymap.set("n", "<leader>h7", function() require("harpoon.ui").nav_file(7) end)
--- keymap.set("n", "<leader>h8", function() require("harpoon.ui").nav_file(8) end)
--- keymap.set("n", "<leader>h9", function() require("harpoon.ui").nav_file(9) end)
-
-
 -- LSP
 keymap.set('n', '<leader>gg', '<cmd>lua vim.lsp.buf.hover()<CR>')
 keymap.set('n', '<leader>gd', '<cmd>lua vim.lsp.buf.definition()<CR>')
@@ -105,26 +86,6 @@ keymap.set('n', '<leader>gl', '<cmd>lua vim.diagnostic.open_float()<CR>')
 keymap.set('n', '<leader>gp', '<cmd>lua vim.diagnostic.goto_prev()<CR>')
 keymap.set('n', '<leader>gn', '<cmd>lua vim.diagnostic.goto_next()<CR>')
 keymap.set('n', '<leader>tr', '<cmd>lua vim.lsp.buf.document_symbol()<CR>')
-
--- Debugging
-keymap.set("n", "<leader>bb", "<cmd>lua require'dap'.toggle_breakpoint()<cr>")
-keymap.set("n", "<leader>bc", "<cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<cr>")
-keymap.set("n", "<leader>bl", "<cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<cr>")
-keymap.set("n", '<leader>br', "<cmd>lua require'dap'.clear_breakpoints()<cr>")
-keymap.set("n", '<leader>ba', '<cmd>Telescope dap list_breakpoints<cr>')
-keymap.set("n", "<leader>dc", "<cmd>lua require'dap'.continue()<cr>")
-keymap.set("n", "<leader>dj", "<cmd>lua require'dap'.step_over()<cr>")
-keymap.set("n", "<leader>dk", "<cmd>lua require'dap'.step_into()<cr>")
-keymap.set("n", "<leader>do", "<cmd>lua require'dap'.step_out()<cr>")
-keymap.set("n", '<leader>dd', function() require('dap').disconnect(); require('dapui').close(); end)
-keymap.set("n", '<leader>dt', function() require('dap').terminate(); require('dapui').close(); end)
-keymap.set("n", "<leader>dr", "<cmd>lua require'dap'.repl.toggle()<cr>")
-keymap.set("n", "<leader>dl", "<cmd>lua require'dap'.run_last()<cr>")
-keymap.set("n", '<leader>di', function() require "dap.ui.widgets".hover() end)
-keymap.set("n", '<leader>d?', function() local widgets = require "dap.ui.widgets"; widgets.centered_float(widgets.scopes) end)
-keymap.set("n", '<leader>df', '<cmd>Telescope dap frames<cr>')
-keymap.set("n", '<leader>dh', '<cmd>Telescope dap commands<cr>')
-keymap.set("n", '<leader>de', function() require('telescope.builtin').diagnostics({default_text=":E:"}) end)
 
 -- Hop (easy-motion)
 keymap.set("n", '<leader>h', ":HopWord<CR>")
@@ -170,3 +131,8 @@ keymap.set("n", "<leader>on", ":AvanteChatNew<cr>", {
 keymap.set("n", "<leader>os", ":AvanteStop<cr>", {
   desc = "Avante: stop chat"
 })
+
+
+-- Go tests
+keymap.set("n", "<leader>Tr", ":Neotest run<CR>") -- run test under cursor
+keymap.set("n", "<leader>TT", ":Neotest summary<CR>") -- show all tests

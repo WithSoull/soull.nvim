@@ -11,7 +11,7 @@ return {
   opts = {
     options = {
       -- For more themes, see https://github.com/nvim-lualine/lualine.nvim/blob/master/THEMES.md
-      theme = "auto", -- "auto, tokyonight, catppuccin, codedark, nord" 
+      theme = "catppuccin", -- "auto, tokyonight, catppuccin, codedark, nord" 
       component_separators = { left = '', right = ''},
       section_separators = { left = '', right = ''},
     },
@@ -22,7 +22,7 @@ return {
           'filename',
           file_status = true,      -- Displays file status (readonly status, modified status)
           newfile_status = false,  -- Display new file status (new file means no write after created)
-          path = 1,                -- 0: Just the filename
+          path = 3,                -- 0: Just the filename
                                    -- 1: Relative path
                                    -- 2: Absolute path
                                    -- 3: Absolute path, with tilde as the home directory
@@ -31,7 +31,7 @@ return {
             modified = '',      -- Text to show when the file is modified.
             readonly = '[-]',      -- Text to show when the file is non-modifiable or readonly.
           }
-        }
+
       }
     }
   },
@@ -42,4 +42,5 @@ return {
     vim.api.nvim_set_hl(0, 'lualine_c_normal', { bg = "none"})
 
   end,
+  }
 }

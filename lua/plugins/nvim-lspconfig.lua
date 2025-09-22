@@ -37,7 +37,8 @@ return {
         'gopls',
         'pyright',
         -- 'buf-language-server',
-      }
+      },
+      automatic_enable=false,
     })
 
     local lspconfig = require('lspconfig')
