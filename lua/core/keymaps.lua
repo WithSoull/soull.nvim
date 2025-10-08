@@ -88,7 +88,13 @@ keymap.set('n', '<leader>gn', '<cmd>lua vim.diagnostic.goto_next()<CR>', { desc 
 keymap.set('n', '<leader>tr', '<cmd>lua vim.lsp.buf.document_symbol()<CR>', { desc = "Document symbols" })
 
 -- Hop (easy-motion)
-keymap.set("n", '<leader>h', ":HopWord<CR>", { desc = "Hop to word" })
+keymap.set("n", '<leader>hw', ":HopWord<CR>", { desc = "Hop to word in this file" })
+keymap.set("n", '<leader>hA', ":HopWordMV<CR>", { desc = "Hop to word anywhere" })
+keymap.set("n", '<leader>ha', ":HopAnywhere<CR>", { desc = "Hop to anywhere in this file" })
+keymap.set("n", '<leader>hA', ":HopAnywhereMV<CR>", { desc = "Hop to anywhere" })
+keymap.set("n", '<leader>hl', ":HopLine<CR>", { desc = "Hop to line in file" })
+keymap.set("n", '<leader>hL', ":HopLineMV<CR>", { desc = "Hop to line anywhere" })
+
 
 -- Copy Error's description 
 keymap.set('n', '<leader>ec', function()

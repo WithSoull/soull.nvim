@@ -16,6 +16,33 @@ return {
       section_separators = { left = '', right = ''},
     },
     sections = {
+      lualine_a = {
+        {
+          'mode',
+          fmt = function(_)
+            local m = vim.api.nvim_get_mode().mode
+            local map = {
+              -- Normal
+              n = 'N', no = 'N', nov = 'N', noV = 'N', ['no\22'] = 'N',
+              niI = 'N', niR = 'N', niV = 'N', nt = 'N', ntT = 'N',
+              -- Insert
+              i = 'I', ic = 'I', ix = 'I',
+              -- Visual
+              v = 'V', V = 'L', ['\22'] = 'B',
+              -- Select (опционально)
+              s = 'S', S = 'S', ['\19'] = 'S',
+              -- Replace
+              R = 'R', Rc = 'R', Rx = 'R', Rv = 'R',
+              -- Command
+              c = 'C', cv = 'C', ce = 'C',
+              -- Terminal (если нужно)
+              t = 'T',
+            }
+            return map[m] or 'N'
+          end,
+          padding = { left = 1, right = 1 },
+        },
+      },
       lualine_c = {
         {
           -- Customize the filename part of lualine to be parent/filename
