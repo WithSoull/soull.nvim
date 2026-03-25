@@ -3,7 +3,7 @@ return {
   -- LSP Configuration
   -- https://github.com/neovim/nvim-lspconfig
   'neovim/nvim-lspconfig',
-  event = 'VeryLazy',
+  event = { 'BufReadPre', 'BufNewFile' },
   dependencies = {
     -- LSP Management
     -- https://github.com/williamboman/mason.nvim
@@ -47,25 +47,26 @@ return {
       -- Create your keybindings here...
     end
 
-    -- Call setup on each LSP server
-    for _, server in ipairs(require("mason-lspconfig").get_installed_servers()) do
-      lspconfig[server].setup({
-        on_attach = lsp_attach,
-        capabilities = lsp_capabilities,
-      })
-    end
-
-    -- Lua LSP settings
-    lspconfig.lua_ls.setup {
-      settings = {
-        Lua = {
-          diagnostics = {
-            -- Get the language server to recognize the `vim` global
-            globals = {'vim'},
+    -- Per-server overrides
+    local server_settings = {
+      lua_ls = {
+        settings = {
+          Lua = {
+            diagnostics = {
+              globals = {'vim'},
+            },
           },
         },
       },
     }
+
+    -- Call setup on each LSP server
+    for _, server in ipairs(require("mason-lspconfig").get_installed_servers()) do
+      lspconfig[server].setup(vim.tbl_deep_extend("force", {
+        on_attach = lsp_attach,
+        capabilities = lsp_capabilities,
+      }, server_settings[server] or {}))
+    end
 
     -- Globally configure all LSP floating preview popups (like hover, signature help, etc)
     local open_floating_preview = vim.lsp.util.open_floating_preview
@@ -77,4 +78,3 @@ return {
 
   end
 }
-

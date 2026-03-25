@@ -13,7 +13,8 @@ keymap.set("n", "<leader>E", ":e", { desc = "Reload page" })
 keymap.set("n", "gx", ":!open <c-r><c-a><CR>", { desc = "Open URL under cursor" })
 keymap.set("n", ";", ":", { noremap = true, silent = false, desc = "Enter command mode" })
 keymap.set("i", "jk", "<ESC>", { desc = "Exit insert mode" })
-keymap.set("n", "<leader>", ":WhichKey <leader><CR>", { desc = "Show WhichKey" })
+keymap.set("n", "<leader><leader>", ":Neotree reveal float<CR>", { desc = "Reveal current file in explorer" })
+keymap.set("n", "<leader>vf", "va{o0", { desc = "Visual golang function"})
 
 -- Split window management
 keymap.set("n", "<leader>sV", "<C-w>v", { desc = "Split window vertically" })
@@ -25,13 +26,13 @@ keymap.set("n", "<leader>sk", "<C-w>+", { desc = "Make split taller" })
 keymap.set("n", "<leader>sl", "<C-w>>5", { desc = "Make split wider" })
 keymap.set("n", "<leader>sh", "<C-w><5", { desc = "Make split narrower" })
 
--- Tab management  
+-- Tab management
 keymap.set("n", "<leader>to", ":tabnew<CR>", { desc = "Open new tab" })
 keymap.set("n", "<leader>tx", ":BufferClose<CR>", { desc = "Close buffer" })
 keymap.set("n", "<leader>tn", ":BufferNext<CR>", { desc = "Next buffer" })
 keymap.set("n", "<leader>tp", ":BufferPrevious<CR>", { desc = "Previous buffer" })
-keymap.set("n", "<C-t>n", ":BufferMoveNext<CR>", { desc = "Move buffer next" })
-keymap.set("n", "<C-t>p", ":BufferMovePrevious<CR>", { desc = "Move buffer previous" })
+keymap.set("n", "<leader>Tn", ":BufferMoveNext<CR>", { desc = "Move buffer next" })
+keymap.set("n", "<leader>Tp", ":BufferMovePrevious<CR>", { desc = "Move buffer previous" })
 keymap.set("n", "<leader>tt", ":BufferPick<CR>", { desc = "Pick buffer" })
 
 -- Diff keymaps
@@ -49,10 +50,8 @@ keymap.set("n", "<leader>qp", ":cprev<CR>", { desc = "Previous quickfix item" })
 keymap.set("n", "<leader>ql", ":clast<CR>", { desc = "Last quickfix item" })
 keymap.set("n", "<leader>qc", ":cclose<CR>", { desc = "Close quickfix list" })
 
--- Nvim-tree
-keymap.set("n", "<leader>et", ":NvimTreeToggle<CR>", { desc = "Toggle file explorer" })
-keymap.set("n", "<leader>ef", ":NvimTreeFocus<CR>", { desc = "Focus file explorer" })
-keymap.set("n", "<leader>eg", ":NvimTreeFindFile<CR>", { desc = "Find file in explorer" })
+-- Neo-tree
+keymap.set("n", "<leader>et", ":Neotree toggle float<CR>", { desc = "Toggle file explorer" })
 
 -- Telescope
 keymap.set('n', '<leader>ff', require('telescope.builtin').find_files, { desc = "Find files" })
@@ -87,16 +86,10 @@ keymap.set('n', '<leader>gp', '<cmd>lua vim.diagnostic.goto_prev()<CR>', { desc 
 keymap.set('n', '<leader>gn', '<cmd>lua vim.diagnostic.goto_next()<CR>', { desc = "Next diagnostic" })
 keymap.set('n', '<leader>tr', '<cmd>lua vim.lsp.buf.document_symbol()<CR>', { desc = "Document symbols" })
 
--- Hop (easy-motion)
-keymap.set("n", '<leader>hw', ":HopWord<CR>", { desc = "Hop to word in this file" })
-keymap.set("n", '<leader>hA', ":HopWordMV<CR>", { desc = "Hop to word anywhere" })
-keymap.set("n", '<leader>ha', ":HopAnywhere<CR>", { desc = "Hop to anywhere in this file" })
-keymap.set("n", '<leader>hA', ":HopAnywhereMV<CR>", { desc = "Hop to anywhere" })
-keymap.set("n", '<leader>hl', ":HopLine<CR>", { desc = "Hop to line in file" })
-keymap.set("n", '<leader>hL', ":HopLineMV<CR>", { desc = "Hop to line anywhere" })
+-- Flash (navigation) — 's' to jump, 'S' for treesitter select (defined in flash.lua)
 
 
--- Copy Error's description 
+-- Copy Error's description
 keymap.set('n', '<leader>ec', function()
   local diag = vim.diagnostic.get()
   local cursor_pos = vim.api.nvim_win_get_cursor(0)

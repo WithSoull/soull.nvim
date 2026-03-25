@@ -28,7 +28,7 @@ opt.cursorline = true
 
 -- Appearance
 opt.termguicolors = true
-opt.background = "dark"
+-- opt.background is set dynamically by colorscheme.lua based on system appearance
 opt.signcolumn = "yes"
 opt.showmode = false
 vim.diagnostic.config {
@@ -55,4 +55,3 @@ opt.mouse = ""
 opt.foldlevel = 20
 opt.foldmethod = "expr"
 opt.foldexpr = "nvim_treesitter#foldexpr()" -- Utilize Treesitter folds
-
