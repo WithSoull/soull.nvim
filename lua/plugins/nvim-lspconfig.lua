@@ -34,7 +34,7 @@ return {
         'quick_lint_js',
         -- 'tsserver', -- requires npm to be installed
         -- 'yamlls', -- requires npm to be installed
-        'gopls',
+        -- 'gopls', -- using custom binary
         'pyright',
         -- 'buf-language-server',
       },
@@ -67,6 +67,12 @@ return {
         capabilities = lsp_capabilities,
       }, server_settings[server] or {}))
     end
+
+    -- Gopls setup (can be overridden by lua/private.lua)
+    lspconfig.gopls.setup({
+      on_attach = lsp_attach,
+      capabilities = lsp_capabilities,
+    })
 
     -- Globally configure all LSP floating preview popups (like hover, signature help, etc)
     local open_floating_preview = vim.lsp.util.open_floating_preview
